@@ -44,10 +44,10 @@ Validate scalability, elasticity, and system behaviour under load
 1. First, I'll create a zoo MCP Server to provide valuable context for improving the use of LLMs with MCP, set up a zoo MCP server with FastMCP — a standard framework for working with the Model Context Protocol. FastMCP provides a quick way to build MCP servers and clients with Python. This MCP server provides data about animals at a fictional zoo. For simplicity, we store the data in memory. For a production MCP server, you probably want to provide data from sources like databases or APIs.
 
 
-2. Add the following zoo MCP server source code to the **server.py** file (mentioned in the folder).
+**Note:** Add the following zoo MCP server source code to the **server.py** file (mentioned in the folder).
 
 
-3. To deploy this, I'll need a docker file and a service account that defines IAM for security. 
+2. To deploy this, I'll need a docker file and a service account that defines IAM for security. 
 The simply run command:
 cd ~/mcp-on-cloudrun
 gcloud run deploy zoo-mcp-server \
