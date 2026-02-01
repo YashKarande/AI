@@ -37,7 +37,7 @@ Validate scalability, elasticity, and system behaviour under load
 
 ## Impementation:
 
-Note: The implementation does not include everything. But this is for public understanding.
+**Note:** The implementation does not include everything. But this is for public understanding.
 
 1. Deploying a Secure MCP Server on Cloud Run
 
