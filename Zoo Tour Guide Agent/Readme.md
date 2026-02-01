@@ -116,4 +116,117 @@ What we'll do:
 
 The **agent.py** in the folder contains our multi-agent system.
 
+The file contains:
+    
+    - Imports and Initial Setup
+    - The Agent's Capabilities
+    - Defines the Specialist Agents
+    - The Workflow Agent
+    - root agent
+
+1. Imports and Initial Setup
+   
+This first block brings in all the necessary libraries from the ADK and Google Cloud. It also sets up logging and loads the environment variables from your .env file, which is crucial for accessing your model and server URL.
+
+2. The Agent's Capabilities
+   
+We define all the capabilities our agent will have, including a custom function to save data, an MCP Tool that connects to our secure MCP server along with a Wikipedia Tool.
+
+Three Tools explained:
+
+    - add_prompt_to_state
+    This tool remembers what a zoo visitor asks. When a visitor asks, "Where are the lions?", this tool saves that specific question into the agent's memory so the other agents in the workflow know what to research.
+    
+    How: It's a Python function that writes the visitor's prompt into the shared tool_context.state dictionary. This tool context represents the agent's short-term memory for a single conversation. Data saved to the state by one agent can be read by the next agent in the workflow.
+    
+    - MCPToolset
+    This is used to connect the tour guide agent to the zoo MCP server created initially. This server has special tools for looking up specific information about our animals, like their name, age, and enclosure.
+    
+    How: It securely connects to the zoo's private server URL. It uses get_id_token to automatically get a secure "keycard" (a service account ID token) to prove its identity and gain access.
+    
+    - LangchainTool
+    This gives the tour guide agent general world knowledge. When a visitor asks a question that isn't in the zoo's database, like "What do lions eat in the wild?", this tool lets the agent look up the answer on Wikipedia.
+
+    How: It acts as an adapter, allowing our agent to use the pre-built WikipediaQueryRun tool from the LangChain library.
+
+Resources:
+
+    - MCP Toolset (https://google.github.io/adk-docs/tools-custom/mcp-tools/)
+    - Function Tools (https://google.github.io/adk-docs/tools-custom/function-tools/)
+    - State (https://google.github.io/adk-docs/sessions/state/)
+    
+3. The Specialist Agents
+   
+we will define the researcher agent and response formatter agent.
+
+    - The researcher agent is the "brain" of our operation. This agent takes the user's prompt from the shared State, examines its powerful tools (the Zoo's MCP Server Tool and the Wikipedia Tool), and decides which ones to use to find the answer.
+    - The response formatter agent's role is presentation. It doesn't use any tools to find new information. Instead, it takes the raw data gathered by the Researcher agent (passed via the State) and uses the LLM's language skills to transform it into a friendly, conversational response.
+
+4. The Workflow Agent
+   
+It's a SequentialAgent, a special type of agent that doesn't think for itself. Its only job is to run a list of sub_agents (the researcher and formatter) in a fixed sequence, automatically passing the shared memory from one to the next.
+
+5. Root Agent
+
+The ADK framework uses as the starting point for all new conversations. Its primary role is to orchestrate the overall process. It acts as the initial controller, managing the first turn of the conversation.
+
+#### Execution:
+
+Grant the service account the Vertex AI User role, which gives it permission to make predictions and call Google's models.
+
+    # Grant the "Vertex AI User" role to your service account
+    gcloud projects add-iam-policy-binding $PROJECT_ID \
+      --member="serviceAccount:$SERVICE_ACCOUNT" \
+      --role="roles/aiplatform.user"
+      
+You will use the adk deploy cloud_run command, a convenient tool that automates the entire deployment workflow. This single command packages your code, builds a container image, pushes it to Artifact Registry, and launches the service on Cloud Run, making it accessible on the web.
+
+    # Run the deployment command
+    uvx --from google-adk \
+    adk deploy cloud_run \
+      --project=$PROJECT_ID \
+      --region=europe-west1 \
+      --service_name=zoo-tour-guide \
+      --with_ui \
+      . \
+      -- \
+      --labels=dev-tutorial=codelab-adk \
+      --service-account=$SERVICE_ACCOUNT
+
+#### Results:
+
+<img width="1432" height="1294" alt="image" src="https://github.com/user-attachments/assets/53e48e53-1f1d-4dd1-b560-630da9460d84" />
+
+#### WorkFlow Explained:
+
+1. The Zoo Greeter (The Welcome Desk)
+
+    The entire process begins with the greeter agent.
+    
+    Its Job: To start the conversation. Its instruction is to greet the user and ask what animal they would like to learn about.
+    
+    Its Tool: When the user replies, the Greeter uses its add_prompt_to_state tool to capture their exact words (e.g., "tell me about the lions") and save them in the system's memory.
+    
+    The Handoff: After saving the prompt, it immediately passes control to its sub-agent, the tour_guide_workflow.
+
+2. The Comprehensive Researcher (The Super-Researcher)
+
+    This is the first step in the main workflow and the "brain" of the operation. Instead of a large team, you now have a single, highly-skilled agent that can access all the available information.
+    
+    Its Job: To analyze the user's question and form an intelligent plan. It uses the language model's powerful tool use capability to decide if it needs:
+    
+    Internal data from the zoo's records (via the MCP Server).
+    General knowledge from the web (via the Wikipedia API).
+    Or, for complex questions, both.
+    Its Action: It executes the necessary tool(s) to gather all the required raw data. For example, if asked "How old are our lions and what do they eat in the wild?", it will call the MCP server for the ages and the Wikipedia tool for the diet information.
+
+3. The Response Formatter (The Presenter)
+
+    Once the Comprehensive Researcher has gathered all the facts, this is the final agent to run.
+    
+    Its Job: To act as the friendly voice of the Zoo Tour Guide. It takes the raw data (which could be from one or both sources) and polishes it.
+    
+    Its Action: It synthesizes all the information into a single, cohesive, and engaging answer. Following its instructions, it first presents the specific zoo information and then adds the interesting general facts.
+
+#### The Final Result: The text generated by this agent is the complete, detailed answer that the user sees in the chat window.
 
