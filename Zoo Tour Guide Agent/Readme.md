@@ -49,13 +49,15 @@ Create and open a new Dockerfile for deploying to Cloud Run.
 
 2. To deploy this, I'll need a docker file and a service account that defines IAM for security. 
 The simply run command:
-cd ~/mcp-on-cloudrun
-gcloud run deploy zoo-mcp-server \
-    --service-account=mcp-server-sa@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com \
-    --no-allow-unauthenticated \
-    --region=europe-west1 \
-    --source=. \
-    --labels=dev-tutorial=codelab-mcp
+
+    cd ~/mcp-on-cloudrun
+   
+   gcloud run deploy zoo-mcp-server \
+        --service-account=mcp-server-sa@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com \
+        --no-allow-unauthenticated \
+        --region=europe-west1 \
+        --source=. \
+        --labels=dev-tutorial=codelab-mcp
 
 Here, --no-allow-unauthenticated flag to require authentication. This is important for security reasons. If you don't require authentication, anyone can call your MCP server and potentially cause damage to your system.
 
@@ -69,11 +71,13 @@ Once deployed, a remote MCP server, you can connect to it using various applicat
 This is for testing and Demo purpose.
 
 For Security, we'll use IAM account permission to call the remote MCP server, and GCP credentials and project number in environment variables for use in the Gemini Settings file
+    
     gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT \
         --member=user:$(gcloud config get-value account) \
         --role='roles/run.invoker'
 
     export PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
+    
     export ID_TOKEN=$(gcloud auth print-identity-token)
 
 
