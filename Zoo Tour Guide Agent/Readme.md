@@ -29,12 +29,12 @@ This project addresses these challenges by designing a modular, cloud-native AI 
 
 The primary goals of this project are to:
 
-    Build a secure MCP server that exposes tools to LLMs via authenticated APIs
-    Design an AI agent that consumes remote tools rather than embedding logic locally
-    Demonstrate separation of concerns between reasoning (agent) and tooling (MCP server)
-    Deploy all components as serverless, scalable Cloud Run services
-    Integrate GPU-accelerated model backends for production inference
-    Validate scalability, elasticity, and system behaviour under load
+    - Build a secure MCP server that exposes tools to LLMs via authenticated APIs
+    - Design an AI agent that consumes remote tools rather than embedding logic locally
+    - Demonstrate separation of concerns between reasoning (agent) and tooling (MCP server)
+    - Deploy all components as serverless, scalable Cloud Run services
+    - Integrate GPU-accelerated model backends for production inference
+    - Validate scalability, elasticity, and system behaviour under load
 
 ## Impementation:
 
