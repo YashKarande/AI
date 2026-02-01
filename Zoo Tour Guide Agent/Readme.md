@@ -37,15 +37,15 @@ Validate scalability, elasticity, and system behaviour under load
 
 ## Impementation:
 
-**Note:** The implementation does not include everything. But this is for public understanding.
+**Note:** The implementation does not include everything. But this overview is for understanding purposes.
 
 ### Deploying a Secure MCP Server on Cloud Run
 
-1. First, I'll create a zoo MCP Server to provide valuable context for improving the use of LLMs with MCP, set up a zoo MCP server with FastMCP — a standard framework for working with the Model Context Protocol. FastMCP provides a quick way to build MCP servers and clients with Python. This MCP server provides data about animals at a fictional zoo. For simplicity, we store the data in memory. For a production MCP server, you probably want to provide data from sources like databases or APIs.
+1. First, I'll create a zoo MCP Server to provide valuable context for improving the use of LLMs with MCP, and set up a zoo MCP server with FastMCP — a standard framework for working with the Model Context Protocol. FastMCP provides a quick way to build MCP servers and clients with Python. This MCP server provides data about animals at a fictional zoo. For simplicity, we store the data in memory. For a production MCP server, you probably want to provide data from sources like databases or APIs.
 
+Create and open a new Dockerfile for deploying to Cloud Run.
 
-**Note:** Add the following zoo MCP server source code to the **server.py** file (mentioned in the folder).
-
+**Note:** Add the following zoo MCP server source code to the **server.py** file (mentioned in the folder). Include the **Dockerfile** (mentioned in the folder) to use the uv tool for running the server.pyfile
 
 2. To deploy this, I'll need a docker file and a service account that defines IAM for security. 
 The simply run command:
@@ -63,3 +63,5 @@ Since it is your first time deploying to Cloud Run from source code, you will se
 Deploying from source requires an Artifact Registry Docker repository to store built containers. A repository named
 [cloud-run-source-deploy] in region [europe-west1] will be created.
 
+3. Add the Remote MCP Server to Gemini CLI
+   Once deployed, a remote MCP server, you can connect to it using various applications like Google Code Assist or Gemini CLI. In this section, we will establish a connection to your new remote MCP server using Gemini CLI. This is for testing and Demo purpose.
