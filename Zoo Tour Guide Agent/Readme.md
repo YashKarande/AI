@@ -63,6 +63,8 @@ Since it is your first time deploying to Cloud Run from source code, you will se
 Deploying from source requires an Artifact Registry Docker repository to store built containers. A repository named
 [cloud-run-source-deploy] in region [europe-west1] will be created.
 
-3. Add the Remote MCP Server to Gemini CLI
+3. Add the Remote MCP Server to Gemini CLI.
+
 Once deployed, a remote MCP server, you can connect to it using various applications like Google Code Assist or Gemini CLI. In this section, we will establish a connection to your new remote MCP server using Gemini CLI.
 This is for testing and Demo purpose.
+
