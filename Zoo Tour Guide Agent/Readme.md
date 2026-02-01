@@ -28,12 +28,13 @@ This project addresses these challenges by designing a modular, cloud-native AI 
 ## Objectives:
 
 The primary goals of this project are to:
-Build a secure MCP server that exposes tools to LLMs via authenticated APIs
-Design an AI agent that consumes remote tools rather than embedding logic locally
-Demonstrate separation of concerns between reasoning (agent) and tooling (MCP server)
-Deploy all components as serverless, scalable Cloud Run services
-Integrate GPU-accelerated model backends for production inference
-Validate scalability, elasticity, and system behaviour under load
+
+    Build a secure MCP server that exposes tools to LLMs via authenticated APIs
+    Design an AI agent that consumes remote tools rather than embedding logic locally
+    Demonstrate separation of concerns between reasoning (agent) and tooling (MCP server)
+    Deploy all components as serverless, scalable Cloud Run services
+    Integrate GPU-accelerated model backends for production inference
+    Validate scalability, elasticity, and system behaviour under load
 
 ## Impementation:
 
@@ -95,4 +96,8 @@ Have gemini list the MCP tools available to it within its context:
 <img width="1010" height="444" alt="image" src="https://github.com/user-attachments/assets/e9a2b42c-f476-413e-9b51-256a555febda" />
 <img width="1565" height="397" alt="image" src="https://github.com/user-attachments/assets/1e544ae7-9d97-4d4a-b865-ff9761968fe9" />
 
+We have successfully deployed and connected to a secure remote MCP server. Now to phase 2.
+
 ### Build and deploy an ADK agent that uses an MCP server on Cloud Run
+
+
