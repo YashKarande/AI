@@ -81,3 +81,17 @@ For Security, we'll use IAM account permission to call the remote MCP server, an
     export ID_TOKEN=$(gcloud auth print-identity-token)
 
 
+#### Result
+
+Start the Gemini CLI in Cloud Shell:
+type "gemini" and Enter
+
+<img width="723" height="441" alt="image" src="https://github.com/user-attachments/assets/282076cc-b2df-46db-951b-f1180bdc47f7" />
+
+Have gemini list the MCP tools available to it within its context:
+    
+    /mcp
+
+<img width="1010" height="444" alt="image" src="https://github.com/user-attachments/assets/e9a2b42c-f476-413e-9b51-256a555febda" />
+<img width="1565" height="397" alt="image" src="https://github.com/user-attachments/assets/1e544ae7-9d97-4d4a-b865-ff9761968fe9" />
+
