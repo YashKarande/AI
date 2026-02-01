@@ -108,10 +108,10 @@ Finally, we'll deploy the tour guide agent to Google Cloud Run, so it can be acc
 
 What we'll do:
 
-    Structure a Python project for ADK deployment.
-    Implement a tool-using agent with google-adk.
-    Connect an agent to a remote MCP server for its toolset.
-    Deploy a Python application as a serverless container to Cloud Run.
-    Configure secure, service-to-service authentication using IAM roles.
-    Delete Cloud resources to avoid incurring future costs.
+    - Implement a tool-using agent with google-adk.
+    - Connect an agent to a remote MCP server for its toolset.
+    - Deploy a Python application as a serverless container to Cloud Run.
+    - Configure secure, service-to-service authentication using IAM roles.
+    - Delete Cloud resources to avoid incurring future costs.
+
 
