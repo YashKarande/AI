@@ -57,10 +57,7 @@ gcloud run deploy zoo-mcp-server \
 
 Here, --no-allow-unauthenticated flag to require authentication. This is important for security reasons. If you don't require authentication, anyone can call your MCP server and potentially cause damage to your system.
 
-Confirm the creation of a new Artifact Registry repository Since it is your first time deploying to Cloud Run from source code, you will see:
+Since it is your first time deploying to Cloud Run from source code, you will see:
 Deploying from source requires an Artifact Registry Docker repository to store built containers. A repository named
 [cloud-run-source-deploy] in region [europe-west1] will be created.
 
-Do you want to continue (Y/n)?
-
-Type "Y" and Enter.
