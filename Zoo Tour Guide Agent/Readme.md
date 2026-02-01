@@ -5,9 +5,10 @@
 This project demonstrates an end-to-end, production-ready architecture for building, securing, and deploying AI agents on Google Cloud. It showcases how Model Context Protocol (MCP) servers, Agent Development Kit (ADK) agents, and GPU-accelerated model backends can be composed into a scalable, secure, and modular system.
 
 The project is implemented in three stages:
-Deploying a secure MCP server on Cloud Run
-Building and deploying an ADK-based agent that consumes the MCP server
-Transitioning from prototype to production by deploying a GPU-accelerated ADK agent with autoscaling and load testing
+
+    - Deploying a secure MCP server on Cloud Run
+    - Building and deploying an ADK-based agent that consumes the MCP server
+    - Transitioning from prototype to production by deploying a GPU-accelerated ADK agent with autoscaling and load testing
 
 The final outcome is a cloud-native, authenticated, service-to-service AI system suitable for real-world workloads.
 
