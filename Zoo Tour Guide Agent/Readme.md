@@ -100,4 +100,18 @@ We have successfully deployed and connected to a secure remote MCP server. Now t
 
 ### Build and deploy an ADK agent that uses an MCP server on Cloud Run
 
+We will use Agent Development Kit (ADK) to build an AI agent that uses remote tools such as the MCP server created earlier. 
+
+Previously, we created an MCP server that provides data about the animals in a fictional zoo to LLMs, for example when using the Gemini CLI. Now, we are building a tour guide agent for the fictional zoo. The agent will use the same MCP server from the previous implementation to access details about the zoo animals, and also use wikipedia to create the best tour guide experience. 
+
+Finally, we'll deploy the tour guide agent to Google Cloud Run, so it can be accessed by all zoo visitors rather than just running locally.
+
+What we'll do:
+
+    Structure a Python project for ADK deployment.
+    Implement a tool-using agent with google-adk.
+    Connect an agent to a remote MCP server for its toolset.
+    Deploy a Python application as a serverless container to Cloud Run.
+    Configure secure, service-to-service authentication using IAM roles.
+    Delete Cloud resources to avoid incurring future costs.
 
