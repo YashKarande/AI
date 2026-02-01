@@ -1,6 +1,6 @@
-Zoo Tour Guide Agent
+#Zoo Tour Guide Agent
 
-Abstract:
+##Abstract:
 
 This project demonstrates an end-to-end, production-ready architecture for building, securing, and deploying AI agents on Google Cloud. It showcases how Model Context Protocol (MCP) servers, Agent Development Kit (ADK) agents, and GPU-accelerated model backends can be composed into a scalable, secure, and modular system.
 
