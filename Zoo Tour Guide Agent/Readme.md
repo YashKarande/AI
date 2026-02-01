@@ -68,3 +68,12 @@ Deploying from source requires an Artifact Registry Docker repository to store b
 Once deployed, a remote MCP server, you can connect to it using various applications like Google Code Assist or Gemini CLI. In this section, we will establish a connection to your new remote MCP server using Gemini CLI.
 This is for testing and Demo purpose.
 
+For Security, we'll use IAM account permission to call the remote MCP server, and GCP credentials and project number in environment variables for use in the Gemini Settings file
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT \
+        --member=user:$(gcloud config get-value account) \
+        --role='roles/run.invoker'
+
+    export PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
+    export ID_TOKEN=$(gcloud auth print-identity-token)
+
+
